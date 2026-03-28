@@ -35,10 +35,19 @@ fi
 # ==================== 添加第三方软件源 ====================
 echo "添加第三方软件源..."
 
-# 添加第三方软件源...
+# 添加依赖库
+# jell 依赖库 - 包含编译所需的依赖包
+echo "src-git jell https://github.com/kenzok8/jell" >> feeds.conf.default
+echo "✓ jell 依赖库已添加"
+
+# 添加插件库
+# openwrt-packages 插件库 - 包含常用插件包
+echo "src-git kenzok8_packages https://github.com/kenzok8/openwrt-packages" >> feeds.conf.default
+echo "✓ kenzok8 插件库已添加"
 
 # 添加OpenClash插件
 echo "src-git openclash https://github.com/vernesong/OpenClash" >> feeds.conf.default
+echo "✓ OpenClash 插件库已添加"
 
 echo "✓ 第三方软件源添加完成"
 
