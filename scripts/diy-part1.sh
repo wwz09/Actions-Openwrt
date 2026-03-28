@@ -35,6 +35,11 @@ fi
 # ==================== 添加第三方软件源 ====================
 echo "添加第三方软件源..."
 
+# 添加QCA插件库
+# QCA-Package 插件库 - 包含QCA平台专用插件
+echo "src-git qca_package https://github.com/wwz09/QCA-Package" >> feeds.conf.default
+echo "✓ QCA插件库已添加"
+
 # 添加依赖库
 # jell 依赖库 - 包含编译所需的依赖包
 echo "src-git jell https://github.com/kenzok8/jell" >> feeds.conf.default

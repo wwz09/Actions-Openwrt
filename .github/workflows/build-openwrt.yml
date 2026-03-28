@@ -49,8 +49,6 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   # 源码分支
   REPO_BRANCH: master
-  # 第三方插件仓库
-  PACKAGE_URL: https://github.com/wwz09/QCA-Package
   # 固件发布配置
   RELEASE_TAG: OpenWrt-AutoBuild-${{ github.run_number }}
   RELEASE_NAME: OpenWrt 自动编译固件 ${{ github.run_number }}
@@ -131,8 +129,7 @@ jobs:
       - name: 加载自定义feeds
         run: |
           cd openwrt
-          # 添加第三方插件仓库到feeds
-          echo "src-git qca_package ${{ env.PACKAGE_URL }}" >> feeds.conf.default
+          # 第三方插件仓库已在 DIY Part 1 脚本中添加
           # 显示feeds配置
           cat feeds.conf.default
 
