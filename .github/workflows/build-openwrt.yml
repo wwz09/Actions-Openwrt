@@ -76,7 +76,7 @@ jobs:
         run: |
           # 根据输入设置编译矩阵
           if [ "${{ github.event.inputs.device }}" = "all" ] || [ -z "${{ github.event.inputs.device }}" ]; then
-            echo 'matrix={"device":["jdc-ax1800","cmcc-rax3000","qihoo-360v6"]}' >> $GITHUB_OUTPUT
+            echo 'matrix={"device":["jdc-ax1800","cmcc-rax3000m","qihoo-360v6"]}' >> $GITHUB_OUTPUT
           else
             echo 'matrix={"device":["${{ github.event.inputs.device }}"]}' >> $GITHUB_OUTPUT
           fi
@@ -290,7 +290,7 @@ jobs:
           
           支持的设备:
           - JDC AX1800
-          - CMCC RAX3000
+          - CMCC RAX3000M
           - Qihoo 360 V6
           
           默认包含功能:
