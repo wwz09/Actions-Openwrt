@@ -35,10 +35,11 @@ fi
 # ==================== 添加第三方软件源 ====================
 echo "添加第三方软件源..."
 
+# 注意：jell 依赖库已暂时移除，因为多个包编译失败
 # 添加依赖库
-# jell 依赖库 - 包含编译所需的依赖包
-echo "src-git jell https://github.com/kenzok8/jell" >> feeds.conf.default
-echo "✓ jell 依赖库已添加"
+# jell 依赖库 - 包含编译所需的依赖包（暂时禁用，编译失败）
+# echo "src-git jell https://github.com/kenzok8/jell" >> feeds.conf.default
+# echo "✓ jell 依赖库已添加"
 
 # 添加插件库
 # openwrt-packages 插件库 - 包含常用插件包
