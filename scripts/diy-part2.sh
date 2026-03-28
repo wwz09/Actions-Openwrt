@@ -230,6 +230,25 @@ iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 EOF
 echo "✓ 防火墙规则添加完成"
 
+# ==================== 修复 luci-app-ota 依赖问题 ====================
+echo "修复 luci-app-ota 依赖问题..."
+echo "当前目录: $(pwd)"
+echo "检查 package/feeds/qca_package 目录..."
+if [ -d "package/feeds/qca_package" ]; then
+    echo "qca_package 目录存在"
+    ls -la package/feeds/qca_package/
+    
+    if [ -d "package/feeds/qca_package/luci-app-ota" ]; then
+        echo "移除有依赖问题的 luci-app-ota 包..."
+        rm -rf package/feeds/qca_package/luci-app-ota
+        echo "✓ luci-app-ota 包已移除"
+    else
+        echo "luci-app-ota 包不存在，跳过移除"
+    fi
+else
+    echo "qca_package 目录不存在，跳过移除"
+fi
+
 echo "============================================"
 echo "DIY Part 2 脚本执行完成"
-echo "============================================"
+echo "==========================================="
