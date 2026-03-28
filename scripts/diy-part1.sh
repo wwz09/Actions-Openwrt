@@ -13,7 +13,7 @@ echo "============================================"
 echo "修改默认IP地址..."
 if [ -f "package/lean/default-settings/files/zzz-default-settings" ]; then
     # 修改默认IP为192.168.1.1
-    sed -i 's/192.168.1.1/192.168.1.1/g' package/lean/default-settings/files/zzz-default-settings
+    sed -i 's/192.168.1.1/192.168.100.1/g' package/lean/default-settings/files/zzz-default-settings
     echo "✓ 默认IP设置完成"
 fi
 

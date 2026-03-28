@@ -149,7 +149,7 @@ cat > package/base-files/files/etc/motd << 'EOF'
 
 技术支持:
   - 源码: https://github.com/coolsnowwolf/lede
-  - 插件: https://github.com/wwz09/QCA-Package
+  - 插件: https://github.com/kenzok8/openwrt-packages
 
 EOF
 echo "✓ motd添加完成"
