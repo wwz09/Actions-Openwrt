@@ -154,7 +154,7 @@
 │       └── build-openwrt.yml    # GitHub Actions工作流
 ├── configs/
 │   ├── jdc-ax1800.config        # JDC AX1800配置
-│   ├── cmcc-rax3000.config      # CMCC RAX3000配置
+│   ├── cmcc-rax3000.config      # CMCC RAX3000M配置
 │   └── qihoo-360v6.config       # Qihoo 360 V6配置
 ├── scripts/
 │   ├── diy-part1.sh             # DIY脚本Part 1 (feeds更新前)
