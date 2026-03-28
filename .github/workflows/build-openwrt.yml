@@ -132,7 +132,7 @@ jobs:
         run: |
           cd openwrt
           # 添加第三方插件仓库到feeds
-          echo "src-git qca_package git@github.com:wwz09/QCA-Package.git" >> feeds.conf.default
+          echo "src-git qca_package ${{ env.PACKAGE_URL }}" >> feeds.conf.default
           # 显示feeds配置
           cat feeds.conf.default
 

@@ -37,14 +37,8 @@ echo "添加第三方软件源..."
 
 # 添加第三方软件源...
 
-# 添加helloworld代理插件
-echo "src-git helloworld git@github.com:fw876/helloworld.git" >> feeds.conf.default
-
 # 添加OpenClash插件
-echo "src-git openclash git@github.com:vernesong/OpenClash.git" >> feeds.conf.default
-
-# 添加passwall插件
-echo "src-git passwall git@github.com:xiaorouji/openwrt-passwall.git" >> feeds.conf.default
+echo "src-git openclash https://github.com/vernesong/OpenClash" >> feeds.conf.default
 
 echo "✓ 第三方软件源添加完成"
 
@@ -68,12 +62,12 @@ echo "添加自定义软件包..."
 
 # 克隆主题
 [ -d "package/luci-theme-argon" ] && rm -rf package/luci-theme-argon
-git clone -b 18.06 git@github.com:jerrykuku/luci-theme-argon.git package/luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 echo "✓ Argon主题克隆完成"
 
 # 克隆Argon配置
 [ -d "package/luci-app-argon-config" ] && rm -rf package/luci-app-argon-config
-git clone git@github.com:jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
+git clone https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
 echo "✓ Argon配置克隆完成"
 
 echo "============================================"
