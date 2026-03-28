@@ -13,7 +13,7 @@
 | 设备名称 | 目标平台 | 配置文件 |
 |---------|---------|---------|
 | JDC AX1800 | ipq60xx | [configs/jdc-ax1800.config](configs/jdc-ax1800.config) |
-| CMCC RAX3000 | ipq60xx | [configs/cmcc-rax3000.config](configs/cmcc-rax3000.config) |
+| CMCC RAX3000M | mediatek | [configs/cmcc-rax3000.config](configs/cmcc-rax3000.config) |
 | Qihoo 360 V6 | ipq60xx | [configs/qihoo-360v6.config](configs/qihoo-360v6.config) |
 
 ## 功能特性
@@ -93,7 +93,7 @@
 5. 选择要编译的设备:
    - `all` - 编译所有设备
    - `jdc-ax1800` - 仅编译JDC AX1800
-   - `cmcc-rax3000` - 仅编译CMCC RAX3000
+   - `cmcc-rax3000m` - 仅编译CMCC RAX3000M
    - `qihoo-360v6` - 仅编译Qihoo 360 V6
 6. 可选: 启用SSH调试
 7. 点击 **Run workflow** 开始编译

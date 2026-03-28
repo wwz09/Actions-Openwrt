@@ -17,7 +17,7 @@ on:
         options:
           - all
           - jdc-ax1800
-          - cmcc-rax3000
+          - cmcc-rax3000m
           - qihoo-360v6
       ssh:
         description: '是否启用SSH调试 (true/false)'
@@ -164,7 +164,7 @@ jobs:
             jdc-ax1800)
               CONFIG_FILE="$GITHUB_WORKSPACE/configs/jdc-ax1800.config"
               ;;
-            cmcc-rax3000)
+            cmcc-rax3000m)
               CONFIG_FILE="$GITHUB_WORKSPACE/configs/cmcc-rax3000.config"
               ;;
             qihoo-360v6)
