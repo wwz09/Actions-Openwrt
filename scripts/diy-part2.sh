@@ -249,6 +249,24 @@ else
     echo "qca_package 目录不存在，跳过移除"
 fi
 
+# ==================== 修复 luci-app-eqos 编译问题 ====================
+echo "修复 luci-app-eqos 编译问题..."
+echo "当前目录: $(pwd)"
+echo "检查 package/feeds/kenzok8_packages 目录..."
+if [ -d "package/feeds/kenzok8_packages" ]; then
+    echo "kenzok8_packages 目录存在"
+    
+    if [ -d "package/feeds/kenzok8_packages/luci-app-eqos" ]; then
+        echo "移除有编译问题的 luci-app-eqos 包..."
+        rm -rf package/feeds/kenzok8_packages/luci-app-eqos
+        echo "✓ luci-app-eqos 包已移除"
+    else
+        echo "luci-app-eqos 包不存在，跳过移除"
+    fi
+else
+    echo "kenzok8_packages 目录不存在，跳过移除"
+fi
+
 echo "============================================"
 echo "DIY Part 2 脚本执行完成"
 echo "==========================================="
