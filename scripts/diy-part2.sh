@@ -267,6 +267,19 @@ else
     echo "kenzok8_packages 目录不存在，跳过移除"
 fi
 
+# ==================== 修复 ksmbd 内核模块编译问题 ====================
+echo "修复 ksmbd 内核模块编译问题..."
+echo "当前目录: $(pwd)"
+echo "检查 package/kernel/ksmbd 目录..."
+if [ -d "package/kernel/ksmbd" ]; then
+    echo "ksmbd 目录存在"
+    echo "移除与内核不兼容的 ksmbd 包..."
+    rm -rf package/kernel/ksmbd
+    echo "✓ ksmbd 包已移除"
+else
+    echo "ksmbd 包不存在，跳过移除"
+fi
+
 echo "============================================"
 echo "DIY Part 2 脚本执行完成"
 echo "==========================================="
