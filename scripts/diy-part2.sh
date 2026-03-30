@@ -270,36 +270,57 @@ fi
 # ==================== 修复 ksmbd 内核模块编译问题 ====================
 echo "修复 ksmbd 内核模块编译问题..."
 echo "当前目录: $(pwd)"
-echo "检查 package/kernel/ksmbd 目录..."
+
+# 检查ksmbd目录
 if [ -d "package/kernel/ksmbd" ]; then
     echo "ksmbd 目录存在"
-    echo "移除与内核不兼容的 ksmbd 包..."
-    rm -rf package/kernel/ksmbd
-    echo "✓ ksmbd 包已移除"
+    
+    # 检查补丁目录是否存在
+    if [ -d "$(dirname "$0")/../patches" ]; then
+        echo "补丁目录存在，应用内核兼容性补丁..."
+        
+        # 应用补丁
+        if [ -f "$(dirname "$0")/apply-patches.sh" ]; then
+            bash "$(dirname "$0")/apply-patches.sh"
+            if [ $? -eq 0 ]; then
+                echo "✓ ksmbd 内核兼容性补丁应用成功"
+            else
+                echo "✗ 补丁应用失败，回退到移除方案"
+                rm -rf package/kernel/ksmbd
+                echo "✓ ksmbd 包已移除"
+            fi
+        else
+            echo "补丁脚本不存在，使用备选方案..."
+            # 直接修改smb1pdu.c文件
+            if [ -f "package/kernel/ksmbd/src/smb1pdu.c" ]; then
+                echo "修改 smb1pdu.c 文件以修复内核兼容性问题..."
+                
+                # 修复ksmbd_vfs_fp_rename函数调用
+                sed -i 's/rc = ksmbd_vfs_fp_rename(work, fp, newname);/#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)\n\trc = ksmbd_vfs_rename(work, fp->f_path.dentry->d_inode, oldname, newname);\n#else\n\trc = ksmbd_vfs_fp_rename(work, fp, newname);\n#endif/' package/kernel/ksmbd/src/smb1pdu.c
+                
+                # 修复file_lock结构成员访问
+                sed -i 's/flock->fl_type = F_RDLCK;/#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)\n\t\t\t\t\tflock->l_type = F_RDLCK;\n#else\n\t\t\t\t\tflock->fl_type = F_RDLCK;\n#endif/' package/kernel/ksmbd/src/smb1pdu.c
+                sed -i 's/flock->fl_type = F_WRLCK;/#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)\n\t\t\t\t\tflock->l_type = F_WRLCK;\n#else\n\t\t\t\t\tflock->fl_type = F_WRLCK;\n\t\t\t\t\tflock->fl_flags |= FL_SLEEP;\n#endif/' package/kernel/ksmbd/src/smb1pdu.c
+                sed -i 's/flock->fl_flags |= FL_SLEEP;//' package/kernel/ksmbd/src/smb1pdu.c
+                sed -i 's/flock->fl_pid = current->tgid;//' package/kernel/ksmbd/src/smb1pdu.c
+                sed -i 's/cmp_lock->fl->fl_file/cmp_lock->fl->l_file/g' package/kernel/ksmbd/src/smb1pdu.c
+                sed -i 's/smb_lock->fl->fl_file/smb_lock->fl->l_file/g' package/kernel/ksmbd/src/smb1pdu.c
+                sed -i 's/flock->fl_file/flock->l_file/g' package/kernel/ksmbd/src/smb1pdu.c
+                
+                echo "✓ ksmbd 内核兼容性修复完成"
+            else
+                echo "smb1pdu.c 文件不存在，移除ksmbd包"
+                rm -rf package/kernel/ksmbd
+                echo "✓ ksmbd 包已移除"
+            fi
+        fi
+    else
+        echo "补丁目录不存在，移除ksmbd包"
+        rm -rf package/kernel/ksmbd
+        echo "✓ ksmbd 包已移除"
+    fi
 else
-    echo "ksmbd 包不存在，跳过移除"
-fi
-
-# ==================== 移除依赖 ksmbd 的包 ====================
-echo "移除依赖 ksmbd 的包..."
-echo "当前目录: $(pwd)"
-
-# 移除 autosamba 包
-if [ -d "package/lean/autosamba" ]; then
-    echo "移除依赖 ksmbd 的 autosamba 包..."
-    rm -rf package/lean/autosamba
-    echo "✓ autosamba 包已移除"
-else
-    echo "autosamba 包不存在，跳过移除"
-fi
-
-# 移除 ksmbd-tools 包
-if [ -d "package/feeds/packages/ksmbd-tools" ]; then
-    echo "移除依赖 ksmbd 的 ksmbd-tools 包..."
-    rm -rf package/feeds/packages/ksmbd-tools
-    echo "✓ ksmbd-tools 包已移除"
-else
-    echo "ksmbd-tools 包不存在，跳过移除"
+    echo "ksmbd 包不存在，跳过修复"
 fi
 
 echo "============================================"

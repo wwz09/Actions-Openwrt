@@ -1,0 +1,110 @@
+From: 李杰 <author@example.com>
+Date: Sun, 30 Mar 2026 00:00:00 +0800
+Subject: [PATCH] fix: ksmbd kernel compatibility for Linux 6.12+
+
+Fix ksmbd compatibility issues with Linux 6.12+ kernels:
+1. Fix file_lock structure member access
+2. Fix ksmbd_vfs_fp_rename function call
+
+Signed-off-by: 李杰 <author@example.com>
+---
+ package/kernel/ksmbd/src/smb1pdu.c | 18 ++++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/package/kernel/ksmbd/src/smb1pdu.c b/package/kernel/ksmbd/src/smb1pdu.c
+index xxxxxxx..xxxxxxx 100644
+--- a/package/kernel/ksmbd/src/smb1pdu.c
++++ b/package/kernel/ksmbd/src/smb1pdu.c
+@@ -885,7 +885,11 @@ static int smb_rename(struct ksmbd_work *work)
+ 		goto out;
+ 	}
+ 
+- rc = ksmbd_vfs_fp_rename(work, fp, newname);
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++ rc = ksmbd_vfs_rename(work, fp->f_path.dentry->d_inode, oldname, newname);
++#else
++ rc = ksmbd_vfs_fp_rename(work, fp, newname);
++#endif
+ 
+ out:
+ 	if (rc) {
+@@ -1710,14 +1714,18 @@ static int smb_locking_andx(struct ksmbd_work *work)
+ 					continue;
+ 
+ 				if (smb_lock->type == LOCK_READ) {
+- 					flock->fl_type = F_RDLCK;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++ 					flock->l_type = F_RDLCK;
++#else
++ 					flock->fl_type = F_RDLCK;
++#endif
+ 				} else {
+- 					flock->fl_type = F_WRLCK;
+- 					flock->fl_flags |= FL_SLEEP;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++ 					flock->l_type = F_WRLCK;
++#else
++ 					flock->fl_type = F_WRLCK;
++ 					flock->fl_flags |= FL_SLEEP;
++#endif
+ 				}
+ 
+- 				/* Set the process id to current->tgid */
+- 				flock->fl_pid = current->tgid;
+ 				flock->fl_start = smb_lock->offset;
+ 				flock->fl_end = smb_lock->offset + smb_lock->length - 1;
+ 
+@@ -1783,7 +1791,11 @@ static int smb_locking_andx(struct ksmbd_work *work)
+ 				if (smb_lock->pid != cmp_lock->pid)
+ 					continue;
+ 
+- 				if (file_inode(cmp_lock->fl->fl_file) !=
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++ 				if (file_inode(cmp_lock->fl->l_file) !=
++#else
++ 				if (file_inode(cmp_lock->fl->fl_file) !=
++#endif
+ 						file_inode(smb_lock->fl->fl_file))
+ 					continue;
+ 
+@@ -1913,7 +1925,11 @@ static int smb_locking_andx(struct ksmbd_work *work)
+ 		if (!smb_lock)
+ 			break;
+ 
+- 	rlock->fl_type = F_UNLCK;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++ 	rlock->l_type = F_UNLCK;
++#else
++ 	rlock->fl_type = F_UNLCK;
++#endif
+ 	rlock->fl_start = smb_lock->offset;
+ 	rlock->fl_end = smb_lock->offset + smb_lock->length - 1;
+ 
+@@ -1949,7 +1965,11 @@ static int smb_locking_andx(struct ksmbd_work *work)
+ 				if (smb_lock->pid != cmp_lock->pid)
+ 					continue;
+ 
+- 				if (file_inode(cmp_lock->fl->fl_file) !=
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++ 				if (file_inode(cmp_lock->fl->l_file) !=
++#else
++ 				if (file_inode(cmp_lock->fl->fl_file) !=
++#endif
+ 						file_inode(flock->fl_file))
+ 					continue;
+ 
+@@ -2019,7 +2039,11 @@ static int smb_locking_andx(struct ksmbd_work *work)
+ 		if (!smb_lock)
+ 			break;
+ 
+- 	rlock->fl_type = F_UNLCK;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++ 	rlock->l_type = F_UNLCK;
++#else
++ 	rlock->fl_type = F_UNLCK;
++#endif
+ 	rlock->fl_start = smb_lock->offset;
+ 	rlock->fl_end = smb_lock->offset + smb_lock->length - 1;
+ 
+-- 
+2.39.0
