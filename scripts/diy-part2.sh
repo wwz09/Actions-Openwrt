@@ -283,7 +283,7 @@ if [ -d "package/kernel/ksmbd" ]; then
         if [ -f "$(dirname "$0")/apply-patches.sh" ]; then
             bash "$(dirname "$0")/apply-patches.sh"
             if [ $? -eq 0 ]; then
-                echo "✓ ksmbd 内核兼容性补丁应用成功"
+                echo "✓ 所有补丁应用成功"
             else
                 echo "✗ 补丁应用失败，回退到移除方案"
                 rm -rf package/kernel/ksmbd
