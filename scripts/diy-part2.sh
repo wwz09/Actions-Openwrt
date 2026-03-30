@@ -267,6 +267,34 @@ else
     echo "kenzo 目录不存在，跳过移除"
 fi
 
+# ==================== 修复循环依赖问题 ====================
+echo "修复循环依赖问题..."
+echo "当前目录: $(pwd)"
+echo "检查 package/feeds/kenzo 目录..."
+if [ -d "package/feeds/kenzo" ]; then
+    echo "kenzo 目录存在"
+    
+    # 移除 luci-app-fchomo (导致 firewall4 -> luci-app-fchomo -> nikki -> firewall4 循环依赖)
+    if [ -d "package/feeds/kenzo/luci-app-fchomo" ]; then
+        echo "移除 luci-app-fchomo 包..."
+        rm -rf package/feeds/kenzo/luci-app-fchomo
+        echo "✓ luci-app-fchomo 包已移除"
+    else
+        echo "luci-app-fchomo 包不存在，跳过移除"
+    fi
+    
+    # 移除 nikki (导致循环依赖)
+    if [ -d "package/feeds/kenzo/nikki" ]; then
+        echo "移除 nikki 包..."
+        rm -rf package/feeds/kenzo/nikki
+        echo "✓ nikki 包已移除"
+    else
+        echo "nikki 包不存在，跳过移除"
+    fi
+else
+    echo "kenzo 目录不存在，跳过移除"
+fi
+
 # ==================== 修复 ksmbd 内核模块编译问题 ====================
 echo "修复 ksmbd 内核模块编译问题..."
 echo "当前目录: $(pwd)"
@@ -321,6 +349,28 @@ if [ -d "package/kernel/ksmbd" ]; then
     fi
 else
     echo "ksmbd 包不存在，跳过修复"
+fi
+
+# ==================== 修复 ksmbd-tools 依赖问题 ====================
+echo "修复 ksmbd-tools 依赖问题..."
+echo "当前目录: $(pwd)"
+
+# 检查并移除 ksmbd-tools (依赖 kmod-fs-ksmbd)
+if [ -d "package/feeds/packages/ksmbd-tools" ]; then
+    echo "移除 ksmbd-tools 包..."
+    rm -rf package/feeds/packages/ksmbd-tools
+    echo "✓ ksmbd-tools 包已移除"
+else
+    echo "ksmbd-tools 包不存在，跳过移除"
+fi
+
+# 检查并移除 autosamba (依赖 ksmbd-server)
+if [ -d "package/feeds/packages/autosamba" ]; then
+    echo "移除 autosamba 包..."
+    rm -rf package/feeds/packages/autosamba
+    echo "✓ autosamba 包已移除"
+else
+    echo "autosamba 包不存在，跳过移除"
 fi
 
 echo "============================================"
