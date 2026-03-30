@@ -280,6 +280,28 @@ else
     echo "ksmbd 包不存在，跳过移除"
 fi
 
+# ==================== 移除依赖 ksmbd 的包 ====================
+echo "移除依赖 ksmbd 的包..."
+echo "当前目录: $(pwd)"
+
+# 移除 autosamba 包
+if [ -d "package/lean/autosamba" ]; then
+    echo "移除依赖 ksmbd 的 autosamba 包..."
+    rm -rf package/lean/autosamba
+    echo "✓ autosamba 包已移除"
+else
+    echo "autosamba 包不存在，跳过移除"
+fi
+
+# 移除 ksmbd-tools 包
+if [ -d "package/feeds/packages/ksmbd-tools" ]; then
+    echo "移除依赖 ksmbd 的 ksmbd-tools 包..."
+    rm -rf package/feeds/packages/ksmbd-tools
+    echo "✓ ksmbd-tools 包已移除"
+else
+    echo "ksmbd-tools 包不存在，跳过移除"
+fi
+
 echo "============================================"
 echo "DIY Part 2 脚本执行完成"
 echo "==========================================="
