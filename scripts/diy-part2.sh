@@ -365,12 +365,25 @@ else
 fi
 
 # 检查并移除 autosamba (依赖 ksmbd-server)
-if [ -d "package/feeds/packages/autosamba" ]; then
-    echo "移除 autosamba 包..."
+if [ -d "package/lean/autosamba" ]; then
+    echo "移除 autosamba 包 (lean)..."
+    rm -rf package/lean/autosamba
+    echo "✓ autosamba 包已移除"
+elif [ -d "package/feeds/packages/autosamba" ]; then
+    echo "移除 autosamba 包 (feeds)..."
     rm -rf package/feeds/packages/autosamba
     echo "✓ autosamba 包已移除"
 else
     echo "autosamba 包不存在，跳过移除"
+fi
+
+# 检查并移除 luci-theme-alpha (依赖 luci-app-alpha-config)
+if [ -d "package/feeds/kenzo/luci-theme-alpha" ]; then
+    echo "移除 luci-theme-alpha 包..."
+    rm -rf package/feeds/kenzo/luci-theme-alpha
+    echo "✓ luci-theme-alpha 包已移除"
+else
+    echo "luci-theme-alpha 包不存在，跳过移除"
 fi
 
 # 检查并移除 luci-app-ksmbd (依赖 ksmbd-server)
