@@ -1,0 +1,4 @@
+2026-03-31T18:35:36.3800000Z Evaluating release.if
+2026-03-31T18:35:36.3800000Z Evaluating: (success() && ((needs.build.result == 'success')))
+2026-03-31T18:35:36.3800000Z Expanded: (false && (needs.build.result == 'success'))
+2026-03-31T18:35:36.3800000Z Result: false

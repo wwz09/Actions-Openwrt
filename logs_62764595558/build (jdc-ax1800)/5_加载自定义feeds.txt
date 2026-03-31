@@ -1,0 +1,29 @@
+﻿2026-03-31T12:32:04.7049157Z ##[group]Run cd openwrt
+2026-03-31T12:32:04.7049401Z [36;1mcd openwrt[0m
+2026-03-31T12:32:04.7049602Z [36;1m# 第三方插件仓库已在 DIY Part 1 脚本中添加[0m
+2026-03-31T12:32:04.7050037Z [36;1m# 显示feeds配置[0m
+2026-03-31T12:32:04.7050245Z [36;1mcat feeds.conf.default[0m
+2026-03-31T12:32:04.7089789Z shell: /usr/bin/bash -e {0}
+2026-03-31T12:32:04.7090062Z env:
+2026-03-31T12:32:04.7090281Z   REPO_URL: https://github.com/coolsnowwolf/lede
+2026-03-31T12:32:04.7090558Z   REPO_BRANCH: master
+2026-03-31T12:32:04.7090767Z   RELEASE_TAG: OpenWrt-AutoBuild-26
+2026-03-31T12:32:04.7091001Z   RELEASE_NAME: OpenWrt 自动编译固件 26
+2026-03-31T12:32:04.7091213Z   TZ: Asia/Shanghai
+2026-03-31T12:32:04.7091533Z   FEEDS_CONF: feeds.conf.default
+2026-03-31T12:32:04.7091759Z   CONFIG_FILE: configs/.config
+2026-03-31T12:32:04.7091972Z   DIY_P1_SH: scripts/diy-part1.sh
+2026-03-31T12:32:04.7092199Z   DIY_P2_SH: scripts/diy-part2.sh
+2026-03-31T12:32:04.7092402Z ##[endgroup]
+2026-03-31T12:32:04.7153231Z src-git packages https://github.com/coolsnowwolf/packages
+2026-03-31T12:32:04.7153988Z #src-git luci https://github.com/coolsnowwolf/luci.git
+2026-03-31T12:32:04.7154777Z src-git luci https://github.com/coolsnowwolf/luci.git;openwrt-23.05
+2026-03-31T12:32:04.7155519Z #src-git luci https://github.com/coolsnowwolf/luci.git;openwrt-24.10
+2026-03-31T12:32:04.7156133Z src-git routing https://github.com/coolsnowwolf/routing
+2026-03-31T12:32:04.7156689Z src-git telephony https://github.com/coolsnowwolf/telephony.git
+2026-03-31T12:32:04.7157052Z #src-git helloworld https://github.com/fw876/helloworld.git
+2026-03-31T12:32:04.7157391Z #src-git qmodem https://github.com/FUjr/modem_feeds.git
+2026-03-31T12:32:04.7157694Z #src-git video https://github.com/openwrt/video.git
+2026-03-31T12:32:04.7158022Z #src-git targets https://github.com/openwrt/targets.git
+2026-03-31T12:32:04.7158352Z #src-git oldpackages http://git.openwrt.org/packages.git
+2026-03-31T12:32:04.7158661Z #src-link custom /usr/src/openwrt/custom-feed

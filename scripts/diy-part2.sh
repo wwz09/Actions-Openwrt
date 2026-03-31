@@ -270,29 +270,94 @@ fi
 # ==================== 修复循环依赖问题 ====================
 echo "修复循环依赖问题..."
 echo "当前目录: $(pwd)"
+
+# 检查并移除 kenzo feeds 中的冲突包
 echo "检查 package/feeds/kenzo 目录..."
 if [ -d "package/feeds/kenzo" ]; then
     echo "kenzo 目录存在"
     
     # 移除 luci-app-fchomo (导致 firewall4 -> luci-app-fchomo -> nikki -> firewall4 循环依赖)
     if [ -d "package/feeds/kenzo/luci-app-fchomo" ]; then
-        echo "移除 luci-app-fchomo 包..."
+        echo "移除 luci-app-fchomo 包 (kenzo)..."
         rm -rf package/feeds/kenzo/luci-app-fchomo
         echo "✓ luci-app-fchomo 包已移除"
     else
-        echo "luci-app-fchomo 包不存在，跳过移除"
+        echo "luci-app-fchomo 包在 kenzo 中不存在"
     fi
     
     # 移除 nikki (导致循环依赖)
     if [ -d "package/feeds/kenzo/nikki" ]; then
-        echo "移除 nikki 包..."
+        echo "移除 nikki 包 (kenzo)..."
         rm -rf package/feeds/kenzo/nikki
         echo "✓ nikki 包已移除"
     else
-        echo "nikki 包不存在，跳过移除"
+        echo "nikki 包在 kenzo 中不存在"
     fi
 else
-    echo "kenzo 目录不存在，跳过移除"
+    echo "kenzo 目录不存在，跳过"
+fi
+
+# 检查并移除 small feeds 中的冲突包
+echo "检查 package/feeds/small 目录..."
+if [ -d "package/feeds/small" ]; then
+    echo "small 目录存在"
+    
+    # 移除 luci-app-fchomo (导致 firewall4 -> luci-app-fchomo -> nikki -> firewall4 循环依赖)
+    if [ -d "package/feeds/small/luci-app-fchomo" ]; then
+        echo "移除 luci-app-fchomo 包 (small)..."
+        rm -rf package/feeds/small/luci-app-fchomo
+        echo "✓ luci-app-fchomo 包已移除"
+    else
+        echo "luci-app-fchomo 包在 small 中不存在"
+    fi
+    
+    # 移除 nikki (导致循环依赖)
+    if [ -d "package/feeds/small/nikki" ]; then
+        echo "移除 nikki 包 (small)..."
+        rm -rf package/feeds/small/nikki
+        echo "✓ nikki 包已移除"
+    else
+        echo "nikki 包在 small 中不存在"
+    fi
+    
+    # 移除 luci-app-nikki (相关包)
+    if [ -d "package/feeds/small/luci-app-nikki" ]; then
+        echo "移除 luci-app-nikki 包 (small)..."
+        rm -rf package/feeds/small/luci-app-nikki
+        echo "✓ luci-app-nikki 包已移除"
+    else
+        echo "luci-app-nikki 包在 small 中不存在"
+    fi
+else
+    echo "small 目录不存在，跳过"
+fi
+
+# 检查并移除 packages feeds 中的 nikki
+echo "检查 package/feeds/packages 目录..."
+if [ -d "package/feeds/packages" ]; then
+    if [ -d "package/feeds/packages/nikki" ]; then
+        echo "移除 nikki 包 (packages)..."
+        rm -rf package/feeds/packages/nikki
+        echo "✓ nikki 包已移除"
+    else
+        echo "nikki 包在 packages 中不存在"
+    fi
+else
+    echo "packages 目录不存在，跳过"
+fi
+
+# 检查并移除 luci feeds 中的 luci-app-nikki
+echo "检查 package/feeds/luci 目录..."
+if [ -d "package/feeds/luci" ]; then
+    if [ -d "package/feeds/luci/applications/luci-app-nikki" ]; then
+        echo "移除 luci-app-nikki 包 (luci)..."
+        rm -rf package/feeds/luci/applications/luci-app-nikki
+        echo "✓ luci-app-nikki 包已移除"
+    else
+        echo "luci-app-nikki 包在 luci 中不存在"
+    fi
+else
+    echo "luci 目录不存在，跳过"
 fi
 
 # ==================== 修复 ksmbd 内核模块编译问题 ====================
