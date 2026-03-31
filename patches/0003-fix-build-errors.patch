@@ -1,0 +1,35 @@
+From: 李杰 <author@example.com>
+Date: Mon, 31 Mar 2026 00:00:00 +0800
+Subject: [PATCH] fix: resolve build errors - remove problematic packages
+
+Fix build errors by removing packages with circular dependencies and missing dependencies:
+1. Remove luci-app-fchomo and nikki to fix circular dependency
+2. Remove ksmbd-related packages to fix dependency issues
+3. Remove luci-app-ksmbd due to architecture incompatibility
+
+Signed-off-by: 李杰 <author@example.com>
+---
+ scripts/diy-part2.sh | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/scripts/diy-part2.sh b/scripts/diy-part2.sh
+index xxxxxxx..xxxxxxx 100644
+--- a/scripts/diy-part2.sh
++++ b/scripts/diy-part2.sh
+@@ -374,4 +374,16 @@ else
+     echo "autosamba 包不存在，跳过移除"
+ fi
+ 
++# 检查并移除 luci-app-ksmbd (依赖 ksmbd-server)
++if [ -d "package/feeds/luci/luci-app-ksmbd" ]; then
++    echo "移除 luci-app-ksmbd 包..."
++    rm -rf package/feeds/luci/luci-app-ksmbd
++    echo "✓ luci-app-ksmbd 包已移除"
++else
++    echo "luci-app-ksmbd 包不存在，跳过移除"
++fi
++
+ echo "============================================"
+ echo "DIY Part 2 脚本执行完成"
+-- 
+2.39.0

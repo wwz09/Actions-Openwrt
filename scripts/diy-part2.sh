@@ -373,6 +373,15 @@ else
     echo "autosamba 包不存在，跳过移除"
 fi
 
+# 检查并移除 luci-app-ksmbd (依赖 ksmbd-server)
+if [ -d "package/feeds/luci/luci-app-ksmbd" ]; then
+    echo "移除 luci-app-ksmbd 包..."
+    rm -rf package/feeds/luci/luci-app-ksmbd
+    echo "✓ luci-app-ksmbd 包已移除"
+else
+    echo "luci-app-ksmbd 包不存在，跳过移除"
+fi
+
 echo "============================================"
 echo "DIY Part 2 脚本执行完成"
 echo "==========================================="
