@@ -349,8 +349,12 @@ fi
 # 检查并移除 luci feeds 中的 luci-app-nikki
 echo "检查 package/feeds/luci 目录..."
 if [ -d "package/feeds/luci" ]; then
-    if [ -d "package/feeds/luci/applications/luci-app-nikki" ]; then
+    if [ -d "package/feeds/luci/luci-app-nikki" ]; then
         echo "移除 luci-app-nikki 包 (luci)..."
+        rm -rf package/feeds/luci/luci-app-nikki
+        echo "✓ luci-app-nikki 包已移除"
+    elif [ -d "package/feeds/luci/applications/luci-app-nikki" ]; then
+        echo "移除 luci-app-nikki 包 (luci/applications)..."
         rm -rf package/feeds/luci/applications/luci-app-nikki
         echo "✓ luci-app-nikki 包已移除"
     else

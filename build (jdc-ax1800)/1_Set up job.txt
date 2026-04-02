@@ -1,0 +1,32 @@
+﻿2026-04-01T08:19:07.5876380Z Current runner version: '2.333.1'
+2026-04-01T08:19:07.5899657Z ##[group]Runner Image Provisioner
+2026-04-01T08:19:07.5900435Z Hosted Compute Agent
+2026-04-01T08:19:07.5900915Z Version: 20260213.493
+2026-04-01T08:19:07.5901431Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+2026-04-01T08:19:07.5902076Z Build Date: 2026-02-13T00:28:41Z
+2026-04-01T08:19:07.5902625Z Worker ID: {2520a4e2-485e-4cbd-95c7-57b9bdeb41b8}
+2026-04-01T08:19:07.5903247Z Azure Region: centralus
+2026-04-01T08:19:07.5903714Z ##[endgroup]
+2026-04-01T08:19:07.5904924Z ##[group]Operating System
+2026-04-01T08:19:07.5905465Z Ubuntu
+2026-04-01T08:19:07.5905864Z 22.04.5
+2026-04-01T08:19:07.5906446Z LTS
+2026-04-01T08:19:07.5906835Z ##[endgroup]
+2026-04-01T08:19:07.5907293Z ##[group]Runner Image
+2026-04-01T08:19:07.5907762Z Image: ubuntu-22.04
+2026-04-01T08:19:07.5908223Z Version: 20260322.68.1
+2026-04-01T08:19:07.5909068Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20260322.68/images/ubuntu/Ubuntu2204-Readme.md
+2026-04-01T08:19:07.5910513Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20260322.68
+2026-04-01T08:19:07.5911306Z ##[endgroup]
+2026-04-01T08:19:07.5912184Z ##[group]GITHUB_TOKEN Permissions
+2026-04-01T08:19:07.5913873Z Contents: write
+2026-04-01T08:19:07.5914456Z Metadata: read
+2026-04-01T08:19:07.5914880Z ##[endgroup]
+2026-04-01T08:19:07.5917299Z Secret source: Actions
+2026-04-01T08:19:07.5918243Z Prepare workflow directory
+2026-04-01T08:19:07.6467470Z Prepare all required actions
+2026-04-01T08:19:07.6517151Z Getting action download info
+2026-04-01T08:19:08.0670371Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-04-01T08:19:08.1913570Z Download action repository 'mxschmitt/action-tmate@v3' (SHA:c0afd6f790e3a5564914980036ebf83216678101)
+2026-04-01T08:19:08.6735079Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-04-01T08:19:08.8971714Z Complete job name: build (jdc-ax1800)
