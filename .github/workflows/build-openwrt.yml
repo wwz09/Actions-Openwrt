@@ -183,6 +183,18 @@ jobs:
           
           # 展开配置
           make defconfig
+          
+          # 验证配置是否正确应用
+          echo "验证目标架构配置..."
+          if grep -q "CONFIG_TARGET_ipq60xx=y" .config; then
+            echo "✓ 目标架构已正确配置为 ipq60xx"
+          elif grep -q "CONFIG_TARGET_mediatek=y" .config; then
+            echo "✓ 目标架构已正确配置为 mediatek"
+          else
+            echo "✗ 警告: 目标架构配置可能不正确"
+            echo "当前配置中的目标架构:"
+            grep "CONFIG_TARGET_" .config | head -5
+          fi
 
       - name: 下载依赖包
         run: |
@@ -213,10 +225,35 @@ jobs:
           # 获取编译结果信息
           echo "status=success" >> $GITHUB_OUTPUT
           
+          # 根据设备确定目标架构目录
+          case "${{ matrix.device }}" in
+            jdc-ax1800)
+              TARGET_DIR="bin/targets/ipq60xx/generic/"
+              ;;
+            cmcc-rax3000m)
+              TARGET_DIR="bin/targets/mediatek/mt7981/"
+              ;;
+            qihoo-360v6)
+              TARGET_DIR="bin/targets/ipq60xx/generic/"
+              ;;
+            *)
+              TARGET_DIR="bin/targets/"
+              ;;
+          esac
+          
           # 查找生成的固件文件
-          FIRMWARE_PATH=$(find bin/targets/ -type f \( -name "*.bin" -o -name "*.img" -o -name "*.gz" \) | head -20)
+          echo "查找固件文件在: $TARGET_DIR"
+          FIRMWARE_PATH=$(find $TARGET_DIR -type f \( -name "*.bin" -o -name "*.img" -o -name "*.gz" \) 2>/dev/null | head -20)
           echo "找到以下固件文件:"
           echo "$FIRMWARE_PATH"
+          
+          # 验证是否找到固件
+          if [ -z "$FIRMWARE_PATH" ]; then
+            echo "✗ 错误: 未找到任何固件文件"
+            echo "检查所有目标目录:"
+            find bin/targets/ -type f \( -name "*.bin" -o -name "*.img" -o -name "*.gz" \) | head -20
+            exit 1
+          fi
           
           # 保存固件路径
           echo "FIRMWARE_PATH<<EOF" >> $GITHUB_ENV
@@ -230,8 +267,25 @@ jobs:
           # 创建固件输出目录
           mkdir -p $GITHUB_WORKSPACE/firmware/${{ matrix.device }}
           
+          # 根据设备确定目标架构目录
+          case "${{ matrix.device }}" in
+            jdc-ax1800)
+              TARGET_DIR="bin/targets/ipq60xx/generic/"
+              ;;
+            cmcc-rax3000m)
+              TARGET_DIR="bin/targets/mediatek/mt7981/"
+              ;;
+            qihoo-360v6)
+              TARGET_DIR="bin/targets/ipq60xx/generic/"
+              ;;
+            *)
+              TARGET_DIR="bin/targets/"
+              ;;
+          esac
+          
           # 复制固件文件
-          find bin/targets/ -type f \( -name "*sysupgrade*.bin" -o -name "*factory*.bin" -o -name "*.img.gz" \) -exec cp {} $GITHUB_WORKSPACE/firmware/${{ matrix.device }}/ \;
+          echo "从 $TARGET_DIR 复制固件文件..."
+          find $TARGET_DIR -type f \( -name "*sysupgrade*.bin" -o -name "*factory*.bin" -o -name "*.img.gz" \) -exec cp {} $GITHUB_WORKSPACE/firmware/${{ matrix.device }}/ \;
           
           # 复制构建信息
           echo "设备: ${{ matrix.device }}" > $GITHUB_WORKSPACE/firmware/${{ matrix.device }}/buildinfo.txt

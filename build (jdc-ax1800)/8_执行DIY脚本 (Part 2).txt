@@ -1,120 +1,121 @@
-﻿2026-04-01T08:21:29.4381091Z ##[group]Run cd openwrt
-2026-04-01T08:21:29.4381350Z [36;1mcd openwrt[0m
-2026-04-01T08:21:29.4381538Z [36;1m# 执行第二部分自定义脚本[0m
-2026-04-01T08:21:29.4381768Z [36;1mchmod +x $GITHUB_WORKSPACE/$DIY_P2_SH[0m
-2026-04-01T08:21:29.4382171Z [36;1m$GITHUB_WORKSPACE/$DIY_P2_SH[0m
-2026-04-01T08:21:29.4421039Z shell: /usr/bin/bash -e {0}
-2026-04-01T08:21:29.4421313Z env:
-2026-04-01T08:21:29.4421551Z   REPO_URL: https://github.com/coolsnowwolf/lede
-2026-04-01T08:21:29.4421837Z   REPO_BRANCH: master
-2026-04-01T08:21:29.4422056Z   RELEASE_TAG: OpenWrt-AutoBuild-28
-2026-04-01T08:21:29.4422305Z   RELEASE_NAME: OpenWrt 自动编译固件 28
-2026-04-01T08:21:29.4422536Z   TZ: Asia/Shanghai
-2026-04-01T08:21:29.4422730Z   FEEDS_CONF: feeds.conf.default
-2026-04-01T08:21:29.4422956Z   CONFIG_FILE: configs/.config
-2026-04-01T08:21:29.4423183Z   DIY_P1_SH: scripts/diy-part1.sh
-2026-04-01T08:21:29.4423415Z   DIY_P2_SH: scripts/diy-part2.sh
-2026-04-01T08:21:29.4423625Z ##[endgroup]
-2026-04-01T08:21:29.4498217Z ============================================
-2026-04-01T08:21:29.4499007Z 开始执行 DIY Part 2 脚本
-2026-04-01T08:21:29.4502285Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
-2026-04-01T08:21:29.4502861Z ============================================
-2026-04-01T08:21:29.4503326Z 修改默认主题...
-2026-04-01T08:21:29.4514686Z ✓ 默认主题修改为Argon
-2026-04-01T08:21:29.4515041Z 设置默认语言为中文...
-2026-04-01T08:21:29.4526350Z ✓ 默认语言设置为中文
-2026-04-01T08:21:29.4526710Z 修改默认时区...
-2026-04-01T08:21:29.4527024Z 修改默认主机名...
-2026-04-01T08:21:29.4527316Z 配置默认WiFi...
-2026-04-01T08:21:29.4544405Z ✓ WiFi配置完成
-2026-04-01T08:21:29.4544731Z 修改网络配置...
-2026-04-01T08:21:29.4545033Z 添加自定义启动脚本...
-2026-04-01T08:21:29.4552236Z mkdir: cannot create directory ‘package/base-files/files/etc/rc.local’: File exists
-2026-04-01T08:21:29.4569327Z ✓ 启动脚本添加完成
-2026-04-01T08:21:29.4569690Z 修改banner信息...
-2026-04-01T08:21:29.4586244Z ✓ Banner修改完成
-2026-04-01T08:21:29.4586587Z 添加motd信息...
-2026-04-01T08:21:29.4601923Z ✓ motd添加完成
-2026-04-01T08:21:29.4602262Z 配置opkg软件源...
-2026-04-01T08:21:29.4618868Z ✓ opkg软件源配置完成
-2026-04-01T08:21:29.4619195Z 添加定时任务...
-2026-04-01T08:21:29.4634464Z ✓ 定时任务添加完成
-2026-04-01T08:21:29.4634783Z 优化系统参数...
-2026-04-01T08:21:29.4650434Z ✓ 系统参数优化完成
-2026-04-01T08:21:29.4650806Z 添加自定义防火墙规则...
-2026-04-01T08:21:29.4666832Z ✓ 防火墙规则添加完成
-2026-04-01T08:21:29.4667206Z 修复 luci-app-ota 依赖问题...
-2026-04-01T08:21:29.4670680Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
-2026-04-01T08:21:29.4671341Z 检查 package/feeds/qca_package 目录...
-2026-04-01T08:21:29.4671734Z qca_package 目录不存在，跳过移除
-2026-04-01T08:21:29.4671972Z 修复 luci-app-eqos 编译问题...
-2026-04-01T08:21:29.4675093Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
-2026-04-01T08:21:29.4675691Z 检查 package/feeds/kenzo 目录...
-2026-04-01T08:21:29.4676173Z kenzo 目录存在
-2026-04-01T08:21:29.4676382Z 移除有编译问题的 luci-app-eqos 包...
-2026-04-01T08:21:29.4683350Z ✓ luci-app-eqos 包已移除
-2026-04-01T08:21:29.4683710Z 修复循环依赖问题...
-2026-04-01T08:21:29.4687062Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
-2026-04-01T08:21:29.4687691Z 检查 package/feeds/kenzo 目录...
-2026-04-01T08:21:29.4688082Z kenzo 目录存在
-2026-04-01T08:21:29.4688433Z luci-app-fchomo 包在 kenzo 中不存在
-2026-04-01T08:21:29.4688858Z nikki 包在 kenzo 中不存在
-2026-04-01T08:21:29.4689326Z 检查 package/feeds/small 目录...
-2026-04-01T08:21:29.4689548Z small 目录存在
-2026-04-01T08:21:29.4689776Z 移除 luci-app-fchomo 包 (small)...
-2026-04-01T08:21:29.4696675Z ✓ luci-app-fchomo 包已移除
-2026-04-01T08:21:29.4696983Z nikki 包在 small 中不存在
-2026-04-01T08:21:29.4697226Z luci-app-nikki 包在 small 中不存在
-2026-04-01T08:21:29.4697576Z 检查 package/feeds/packages 目录...
-2026-04-01T08:21:29.4697993Z 移除 nikki 包 (packages)...
-2026-04-01T08:21:29.4706532Z ✓ nikki 包已移除
-2026-04-01T08:21:29.4706867Z 检查 package/feeds/luci 目录...
-2026-04-01T08:21:29.4707122Z luci-app-nikki 包在 luci 中不存在
-2026-04-01T08:21:29.4707371Z 修复 ksmbd 内核模块编译问题...
-2026-04-01T08:21:29.4710337Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
-2026-04-01T08:21:29.4711455Z ksmbd 目录存在
-2026-04-01T08:21:29.4721488Z 补丁目录存在，应用内核兼容性补丁...
-2026-04-01T08:21:29.4758861Z 应用ksmbd内核兼容性补丁...
-2026-04-01T08:21:29.4765099Z can't find file to patch at input line 18
-2026-04-01T08:21:29.4765634Z Perhaps you used the wrong -p or --strip option?
-2026-04-01T08:21:29.4766228Z The text leading up to this was:
-2026-04-01T08:21:29.4766542Z --------------------------
-2026-04-01T08:21:29.4767006Z |From: 李杰 <author@example.com>
-2026-04-01T08:21:29.4767390Z |Date: Sun, 30 Mar 2026 00:00:00 +0800
-2026-04-01T08:21:29.4767940Z |Subject: [PATCH] fix: ksmbd kernel compatibility for Linux 6.12+
-2026-04-01T08:21:29.4768464Z |
-2026-04-01T08:21:29.4768739Z |Fix ksmbd compatibility issues with Linux 6.12+ kernels:
-2026-04-01T08:21:29.4769079Z |1. Fix file_lock structure member access
-2026-04-01T08:21:29.4769514Z |2. Fix ksmbd_vfs_fp_rename function call
-2026-04-01T08:21:29.4769836Z |
-2026-04-01T08:21:29.4770061Z |Signed-off-by: 李杰 <author@example.com>
-2026-04-01T08:21:29.4770290Z |---
-2026-04-01T08:21:29.4770518Z | package/kernel/ksmbd/src/smb1pdu.c | 18 ++++++++++++++------
-2026-04-01T08:21:29.4770866Z | 1 file changed, 12 insertions(+), 6 deletions(-)
-2026-04-01T08:21:29.4771116Z |
-2026-04-01T08:21:29.4771419Z |diff --git a/package/kernel/ksmbd/src/smb1pdu.c b/package/kernel/ksmbd/src/smb1pdu.c
-2026-04-01T08:21:29.4771825Z |index xxxxxxx..xxxxxxx 100644
-2026-04-01T08:21:29.4772063Z |--- a/package/kernel/ksmbd/src/smb1pdu.c
-2026-04-01T08:21:29.4772318Z |+++ b/package/kernel/ksmbd/src/smb1pdu.c
-2026-04-01T08:21:29.4772553Z --------------------------
-2026-04-01T08:21:29.4772756Z File to patch: 
-2026-04-01T08:21:29.4772934Z Skip this patch? [y] 
-2026-04-01T08:21:29.4773133Z Skipping patch.
-2026-04-01T08:21:29.4773488Z patch: **** malformed patch at line 55:  				flock->fl_end = smb_lock->offset + smb_lock->length - 1;
-2026-04-01T08:21:29.4773815Z 
-2026-04-01T08:21:29.4773920Z ✗ ksmbd 补丁应用失败
-2026-04-01T08:21:29.4774132Z ✗ 补丁应用失败，回退到移除方案
-2026-04-01T08:21:29.4777829Z ✓ ksmbd 包已移除
-2026-04-01T08:21:29.4778190Z 修复 ksmbd-tools 依赖问题...
-2026-04-01T08:21:29.4781587Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
-2026-04-01T08:21:29.4782173Z 移除 ksmbd-tools 包...
-2026-04-01T08:21:29.4789263Z ✓ ksmbd-tools 包已移除
-2026-04-01T08:21:29.4789635Z 移除 autosamba 包 (lean)...
-2026-04-01T08:21:29.4797792Z ✓ autosamba 包已移除
-2026-04-01T08:21:29.4798182Z 移除 luci-theme-alpha 包...
-2026-04-01T08:21:29.4805271Z ✓ luci-theme-alpha 包已移除
-2026-04-01T08:21:29.4805685Z 移除 luci-app-ksmbd 包...
-2026-04-01T08:21:29.4812830Z ✓ luci-app-ksmbd 包已移除
-2026-04-01T08:21:29.4813185Z ============================================
-2026-04-01T08:21:29.4813553Z DIY Part 2 脚本执行完成
-2026-04-01T08:21:29.4813851Z ===========================================
+﻿2026-04-02T01:04:10.2529418Z ##[group]Run cd openwrt
+2026-04-02T01:04:10.2529670Z [36;1mcd openwrt[0m
+2026-04-02T01:04:10.2529850Z [36;1m# 执行第二部分自定义脚本[0m
+2026-04-02T01:04:10.2530087Z [36;1mchmod +x $GITHUB_WORKSPACE/$DIY_P2_SH[0m
+2026-04-02T01:04:10.2530471Z [36;1m$GITHUB_WORKSPACE/$DIY_P2_SH[0m
+2026-04-02T01:04:10.2568588Z shell: /usr/bin/bash -e {0}
+2026-04-02T01:04:10.2568825Z env:
+2026-04-02T01:04:10.2569044Z   REPO_URL: https://github.com/coolsnowwolf/lede
+2026-04-02T01:04:10.2569320Z   REPO_BRANCH: master
+2026-04-02T01:04:10.2569533Z   RELEASE_TAG: OpenWrt-AutoBuild-29
+2026-04-02T01:04:10.2569766Z   RELEASE_NAME: OpenWrt 自动编译固件 29
+2026-04-02T01:04:10.2569985Z   TZ: Asia/Shanghai
+2026-04-02T01:04:10.2570167Z   FEEDS_CONF: feeds.conf.default
+2026-04-02T01:04:10.2570386Z   CONFIG_FILE: configs/.config
+2026-04-02T01:04:10.2570597Z   DIY_P1_SH: scripts/diy-part1.sh
+2026-04-02T01:04:10.2570822Z   DIY_P2_SH: scripts/diy-part2.sh
+2026-04-02T01:04:10.2571022Z ##[endgroup]
+2026-04-02T01:04:10.2644682Z ============================================
+2026-04-02T01:04:10.2645525Z 开始执行 DIY Part 2 脚本
+2026-04-02T01:04:10.2646450Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
+2026-04-02T01:04:10.2647471Z ============================================
+2026-04-02T01:04:10.2647969Z 修改默认主题...
+2026-04-02T01:04:10.2662469Z ✓ 默认主题修改为Argon
+2026-04-02T01:04:10.2662828Z 设置默认语言为中文...
+2026-04-02T01:04:10.2670666Z ✓ 默认语言设置为中文
+2026-04-02T01:04:10.2670999Z 修改默认时区...
+2026-04-02T01:04:10.2671388Z 修改默认主机名...
+2026-04-02T01:04:10.2671780Z 配置默认WiFi...
+2026-04-02T01:04:10.2689404Z ✓ WiFi配置完成
+2026-04-02T01:04:10.2689804Z 修改网络配置...
+2026-04-02T01:04:10.2690115Z 添加自定义启动脚本...
+2026-04-02T01:04:10.2698502Z mkdir: cannot create directory ‘package/base-files/files/etc/rc.local’: File exists
+2026-04-02T01:04:10.2717247Z ✓ 启动脚本添加完成
+2026-04-02T01:04:10.2717607Z 修改banner信息...
+2026-04-02T01:04:10.2735290Z ✓ Banner修改完成
+2026-04-02T01:04:10.2735623Z 添加motd信息...
+2026-04-02T01:04:10.2751640Z ✓ motd添加完成
+2026-04-02T01:04:10.2751977Z 配置opkg软件源...
+2026-04-02T01:04:10.2768145Z ✓ opkg软件源配置完成
+2026-04-02T01:04:10.2768447Z 添加定时任务...
+2026-04-02T01:04:10.2784538Z ✓ 定时任务添加完成
+2026-04-02T01:04:10.2784857Z 优化系统参数...
+2026-04-02T01:04:10.2801167Z ✓ 系统参数优化完成
+2026-04-02T01:04:10.2801751Z 添加自定义防火墙规则...
+2026-04-02T01:04:10.2817509Z ✓ 防火墙规则添加完成
+2026-04-02T01:04:10.2817836Z 修复 luci-app-ota 依赖问题...
+2026-04-02T01:04:10.2821205Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
+2026-04-02T01:04:10.2821982Z 检查 package/feeds/qca_package 目录...
+2026-04-02T01:04:10.2822425Z qca_package 目录不存在，跳过移除
+2026-04-02T01:04:10.2822751Z 修复 luci-app-eqos 编译问题...
+2026-04-02T01:04:10.2825695Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
+2026-04-02T01:04:10.2826261Z 检查 package/feeds/kenzo 目录...
+2026-04-02T01:04:10.2826506Z kenzo 目录存在
+2026-04-02T01:04:10.2826712Z 移除有编译问题的 luci-app-eqos 包...
+2026-04-02T01:04:10.2834409Z ✓ luci-app-eqos 包已移除
+2026-04-02T01:04:10.2834832Z 修复循环依赖问题...
+2026-04-02T01:04:10.2837974Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
+2026-04-02T01:04:10.2838659Z 检查 package/feeds/kenzo 目录...
+2026-04-02T01:04:10.2838892Z kenzo 目录存在
+2026-04-02T01:04:10.2839156Z luci-app-fchomo 包在 kenzo 中不存在
+2026-04-02T01:04:10.2839543Z nikki 包在 kenzo 中不存在
+2026-04-02T01:04:10.2839950Z 检查 package/feeds/small 目录...
+2026-04-02T01:04:10.2840176Z small 目录存在
+2026-04-02T01:04:10.2840377Z 移除 luci-app-fchomo 包 (small)...
+2026-04-02T01:04:10.2847307Z ✓ luci-app-fchomo 包已移除
+2026-04-02T01:04:10.2847669Z nikki 包在 small 中不存在
+2026-04-02T01:04:10.2848046Z luci-app-nikki 包在 small 中不存在
+2026-04-02T01:04:10.2848469Z 检查 package/feeds/packages 目录...
+2026-04-02T01:04:10.2848779Z 移除 nikki 包 (packages)...
+2026-04-02T01:04:10.2856098Z ✓ nikki 包已移除
+2026-04-02T01:04:10.2856433Z 检查 package/feeds/luci 目录...
+2026-04-02T01:04:10.2856854Z 移除 luci-app-nikki 包 (luci)...
+2026-04-02T01:04:10.2864404Z ✓ luci-app-nikki 包已移除
+2026-04-02T01:04:10.2864789Z 修复 ksmbd 内核模块编译问题...
+2026-04-02T01:04:10.2868115Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
+2026-04-02T01:04:10.2868804Z ksmbd 目录存在
+2026-04-02T01:04:10.2878619Z 补丁目录存在，应用内核兼容性补丁...
+2026-04-02T01:04:10.2915535Z 应用ksmbd内核兼容性补丁...
+2026-04-02T01:04:10.2922289Z can't find file to patch at input line 18
+2026-04-02T01:04:10.2922845Z Perhaps you used the wrong -p or --strip option?
+2026-04-02T01:04:10.2923306Z The text leading up to this was:
+2026-04-02T01:04:10.2923663Z --------------------------
+2026-04-02T01:04:10.2924083Z |From: 李杰 <author@example.com>
+2026-04-02T01:04:10.2924462Z |Date: Sun, 30 Mar 2026 00:00:00 +0800
+2026-04-02T01:04:10.2925095Z |Subject: [PATCH] fix: ksmbd kernel compatibility for Linux 6.12+
+2026-04-02T01:04:10.2925617Z |
+2026-04-02T01:04:10.2925906Z |Fix ksmbd compatibility issues with Linux 6.12+ kernels:
+2026-04-02T01:04:10.2926201Z |1. Fix file_lock structure member access
+2026-04-02T01:04:10.2926514Z |2. Fix ksmbd_vfs_fp_rename function call
+2026-04-02T01:04:10.2926867Z |
+2026-04-02T01:04:10.2927090Z |Signed-off-by: 李杰 <author@example.com>
+2026-04-02T01:04:10.2927373Z |---
+2026-04-02T01:04:10.2927714Z | package/kernel/ksmbd/src/smb1pdu.c | 18 ++++++++++++++------
+2026-04-02T01:04:10.2928273Z | 1 file changed, 12 insertions(+), 6 deletions(-)
+2026-04-02T01:04:10.2928683Z |
+2026-04-02T01:04:10.2929206Z |diff --git a/package/kernel/ksmbd/src/smb1pdu.c b/package/kernel/ksmbd/src/smb1pdu.c
+2026-04-02T01:04:10.2929868Z |index xxxxxxx..xxxxxxx 100644
+2026-04-02T01:04:10.2930260Z |--- a/package/kernel/ksmbd/src/smb1pdu.c
+2026-04-02T01:04:10.2930696Z |+++ b/package/kernel/ksmbd/src/smb1pdu.c
+2026-04-02T01:04:10.2931073Z --------------------------
+2026-04-02T01:04:10.2931415Z File to patch: 
+2026-04-02T01:04:10.2931846Z Skip this patch? [y] 
+2026-04-02T01:04:10.2932167Z Skipping patch.
+2026-04-02T01:04:10.2932761Z patch: **** malformed patch at line 55:  				flock->fl_end = smb_lock->offset + smb_lock->length - 1;
+2026-04-02T01:04:10.2933308Z 
+2026-04-02T01:04:10.2933520Z ✗ ksmbd 补丁应用失败
+2026-04-02T01:04:10.2933880Z ✗ 补丁应用失败，回退到移除方案
+2026-04-02T01:04:10.2937757Z ✓ ksmbd 包已移除
+2026-04-02T01:04:10.2938040Z 修复 ksmbd-tools 依赖问题...
+2026-04-02T01:04:10.2941686Z 当前目录: /home/runner/work/Actions-Openwrt/Actions-Openwrt/openwrt
+2026-04-02T01:04:10.2942267Z 移除 ksmbd-tools 包...
+2026-04-02T01:04:10.2949419Z ✓ ksmbd-tools 包已移除
+2026-04-02T01:04:10.2949774Z 移除 autosamba 包 (lean)...
+2026-04-02T01:04:10.2958834Z ✓ autosamba 包已移除
+2026-04-02T01:04:10.2959241Z 移除 luci-theme-alpha 包...
+2026-04-02T01:04:10.2966524Z ✓ luci-theme-alpha 包已移除
+2026-04-02T01:04:10.2966952Z 移除 luci-app-ksmbd 包...
+2026-04-02T01:04:10.2974243Z ✓ luci-app-ksmbd 包已移除
+2026-04-02T01:04:10.2974605Z ============================================
+2026-04-02T01:04:10.2975062Z DIY Part 2 脚本执行完成
+2026-04-02T01:04:10.2975351Z ===========================================
