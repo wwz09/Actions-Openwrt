@@ -153,20 +153,33 @@ jobs:
             exit 1
           fi
           
-          # 清理旧配置和源码缓存
-          echo "清理旧配置和源码缓存..."
-          make distclean > /dev/null 2>&1 || true
+          # 清理旧配置缓存（不使用distclean，避免删除必要文件）
+          echo "清理旧配置缓存..."
+          make cleanconfig > /dev/null 2>&1 || true
+          make clean > /dev/null 2>&1 || true
           
-          # 重新加载配置
-          echo "重新加载配置..."
+          # 复制配置文件
+          echo "复制配置文件..."
           cp "$CONFIG_FILE" .config
+          echo "配置文件内容:"
+          cat $CONFIG_FILE | grep "CONFIG_TARGET_"
+          
+          # 验证配置文件是否正确复制
+          echo "验证配置文件复制..."
+          if [ -f ".config" ]; then
+            echo "✓ 配置文件已成功复制"
+            cat .config | grep "CONFIG_TARGET_"
+          else
+            echo "✗ 错误: 配置文件未成功复制"
+            exit 1
+          fi
           
           # 展开配置
           echo "展开配置..."
           make defconfig
           
           # 显示完整的配置内容（用于调试）
-          echo "完整的配置文件内容:"
+          echo "展开后的配置文件内容:"
           cat .config | grep "CONFIG_TARGET_"
           
           # 验证配置是否正确应用
@@ -184,7 +197,7 @@ jobs:
           else
             echo "✗ 错误: 目标架构配置不正确"
             echo "当前配置中的目标架构:"
-            grep "CONFIG_TARGET_" .config | head -20
+            grep "CONFIG_TARGET_" .config | head -30
             exit 1
           fi
           
