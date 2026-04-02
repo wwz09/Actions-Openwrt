@@ -176,25 +176,63 @@ jobs:
           if [ -f "$CONFIG_FILE" ]; then
             cp "$CONFIG_FILE" .config
             echo "已加载配置文件: $CONFIG_FILE"
+            
+            # 验证配置文件内容
+            echo "验证配置文件内容..."
+            if grep -q "CONFIG_TARGET_ipq60xx_generic_DEVICE_jdc_ax1800=y" $CONFIG_FILE; then
+              echo "✓ 配置文件包含正确的设备配置: CONFIG_TARGET_ipq60xx_generic_DEVICE_jdc_ax1800=y"
+            elif grep -q "CONFIG_TARGET_mediatek_filogic_DEVICE_cmcc_rax3000m-nand=y" $CONFIG_FILE; then
+              echo "✓ 配置文件包含正确的设备配置: CONFIG_TARGET_mediatek_filogic_DEVICE_cmcc_rax3000m-nand=y"
+            else
+              echo "✗ 错误: 配置文件缺少正确的设备配置"
+              cat $CONFIG_FILE | grep "CONFIG_TARGET_"
+              exit 1
+            fi
           else
             echo "配置文件不存在: $CONFIG_FILE"
             exit 1
           fi
           
+          # 清理旧配置缓存
+          echo "清理旧配置缓存..."
+          make cleanconfig > /dev/null 2>&1 || true
+          
           # 展开配置
+          echo "展开配置..."
           make defconfig
           
           # 验证配置是否正确应用
           echo "验证目标架构配置..."
           if grep -q "CONFIG_TARGET_ipq60xx=y" .config; then
             echo "✓ 目标架构已正确配置为 ipq60xx"
+            # 再次验证设备配置
+            if grep -q "CONFIG_TARGET_ipq60xx_generic_DEVICE_jdc_ax1800=y" .config; then
+              echo "✓ 设备配置已正确应用: jdc-ax1800"
+            else
+              echo "✗ 错误: 设备配置未正确应用"
+              grep "CONFIG_TARGET_ipq60xx" .config
+              exit 1
+            fi
           elif grep -q "CONFIG_TARGET_mediatek=y" .config; then
             echo "✓ 目标架构已正确配置为 mediatek"
+            # 再次验证设备配置
+            if grep -q "CONFIG_TARGET_mediatek_filogic_DEVICE_cmcc_rax3000m-nand=y" .config; then
+              echo "✓ 设备配置已正确应用: cmcc-rax3000m"
+            else
+              echo "✗ 错误: 设备配置未正确应用"
+              grep "CONFIG_TARGET_mediatek" .config
+              exit 1
+            fi
           else
-            echo "✗ 警告: 目标架构配置可能不正确"
+            echo "✗ 错误: 目标架构配置不正确"
             echo "当前配置中的目标架构:"
-            grep "CONFIG_TARGET_" .config | head -5
+            grep "CONFIG_TARGET_" .config | head -10
+            exit 1
           fi
+          
+          # 显示完整的目标配置
+          echo "完整的目标配置:"
+          grep "CONFIG_TARGET_" .config | grep -v "#"
 
       - name: 下载依赖包
         run: |
@@ -231,7 +269,7 @@ jobs:
               TARGET_DIR="bin/targets/ipq60xx/generic/"
               ;;
             cmcc-rax3000m)
-              TARGET_DIR="bin/targets/mediatek/mt7981/"
+              TARGET_DIR="bin/targets/mediatek/filogic/"
               ;;
             qihoo-360v6)
               TARGET_DIR="bin/targets/ipq60xx/generic/"
@@ -273,7 +311,7 @@ jobs:
               TARGET_DIR="bin/targets/ipq60xx/generic/"
               ;;
             cmcc-rax3000m)
-              TARGET_DIR="bin/targets/mediatek/mt7981/"
+              TARGET_DIR="bin/targets/mediatek/filogic/"
               ;;
             qihoo-360v6)
               TARGET_DIR="bin/targets/ipq60xx/generic/"
