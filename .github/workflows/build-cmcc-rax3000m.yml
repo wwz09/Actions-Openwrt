@@ -153,13 +153,21 @@ jobs:
             exit 1
           fi
           
-          # 清理旧配置缓存
-          echo "清理旧配置缓存..."
-          make cleanconfig > /dev/null 2>&1 || true
+          # 清理旧配置和源码缓存
+          echo "清理旧配置和源码缓存..."
+          make distclean > /dev/null 2>&1 || true
+          
+          # 重新加载配置
+          echo "重新加载配置..."
+          cp "$CONFIG_FILE" .config
           
           # 展开配置
           echo "展开配置..."
           make defconfig
+          
+          # 显示完整的配置内容（用于调试）
+          echo "完整的配置文件内容:"
+          cat .config | grep "CONFIG_TARGET_"
           
           # 验证配置是否正确应用
           echo "验证目标架构配置..."
@@ -176,7 +184,7 @@ jobs:
           else
             echo "✗ 错误: 目标架构配置不正确"
             echo "当前配置中的目标架构:"
-            grep "CONFIG_TARGET_" .config | head -10
+            grep "CONFIG_TARGET_" .config | head -20
             exit 1
           fi
           
