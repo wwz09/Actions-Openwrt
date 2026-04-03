@@ -141,8 +141,8 @@ jobs:
             
             # 验证配置文件内容
             echo "验证配置文件内容..."
-            if grep -q "CONFIG_TARGET_ipq60xx_generic_DEVICE_jdc_ax1800=y" $CONFIG_FILE; then
-              echo "✓ 配置文件包含正确的设备配置: CONFIG_TARGET_ipq60xx_generic_DEVICE_jdc_ax1800=y"
+            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx" $CONFIG_FILE; then
+              echo "✓ 配置文件包含正确的设备配置: CONFIG_TARGET_qualcommax_ipq60xx"
             else
               echo "✗ 错误: 配置文件缺少正确的设备配置"
               cat $CONFIG_FILE | grep "CONFIG_TARGET_"
@@ -184,14 +184,14 @@ jobs:
           
           # 验证配置是否正确应用
           echo "验证目标架构配置..."
-          if grep -q "CONFIG_TARGET_ipq60xx=y" .config; then
-            echo "✓ 目标架构已正确配置为 ipq60xx"
+          if grep -q "CONFIG_TARGET_qualcommax=y" .config; then
+            echo "✓ 目标架构已正确配置为 qualcommax"
             # 再次验证设备配置
-            if grep -q "CONFIG_TARGET_ipq60xx_generic_DEVICE_jdc_ax1800=y" .config; then
+            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx" .config; then
               echo "✓ 设备配置已正确应用: jdc-ax1800"
             else
               echo "✗ 错误: 设备配置未正确应用"
-              grep "CONFIG_TARGET_ipq60xx" .config
+              grep "CONFIG_TARGET_qualcommax" .config
               exit 1
             fi
           else
