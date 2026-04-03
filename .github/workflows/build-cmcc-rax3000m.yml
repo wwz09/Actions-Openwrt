@@ -318,7 +318,8 @@ jobs:
           
           编译时间: $(date '+%Y-%m-%d %H:%M:%S')
           源码仓库: coolsnowwolf/lede
-          插件仓库: wwz09/QCA-Package
+          插件仓库: kenzok8/openwrt-packages
+          插件依赖: kenzok8/smaill
           
           支持的设备:
           - CMCC RAX3000M

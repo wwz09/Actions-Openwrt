@@ -121,7 +121,8 @@ cat > package/base-files/files/etc/banner << 'EOF'
   固件版本: OpenWrt AutoBuild
   编译时间: $(date '+%Y-%m-%d %H:%M:%S')
   源码仓库: coolsnowwolf/lede
-  插件仓库: wwz09/QCA-Package
+  插件仓库: kenzok8/openwrt-packages
+  插件依赖: kenzok8/smaill
  -----------------------------------------------------
 EOF
 echo "✓ Banner修改完成"
