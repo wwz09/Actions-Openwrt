@@ -237,7 +237,7 @@ jobs:
           # 根据设备确定目标架构目录
           case "${{ env.DEVICE }}" in
             jdc-ax1800)
-              TARGET_DIR="bin/targets/ipq60xx/generic/"
+              TARGET_DIR="bin/targets/qualcommax/ipq60xx/"
               ;;
             *)
               TARGET_DIR="bin/targets/"
@@ -273,7 +273,7 @@ jobs:
           # 根据设备确定目标架构目录
           case "${{ env.DEVICE }}" in
             jdc-ax1800)
-              TARGET_DIR="bin/targets/ipq60xx/generic/"
+              TARGET_DIR="bin/targets/qualcommax/ipq60xx/"
               ;;
             *)
               TARGET_DIR="bin/targets/"
