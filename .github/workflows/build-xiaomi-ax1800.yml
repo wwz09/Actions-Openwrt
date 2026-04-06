@@ -217,6 +217,37 @@ jobs:
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
 
+      - name: 清理磁盘空间
+        run: |
+          # 显示当前磁盘空间使用情况
+          echo "=== 清理前磁盘空间使用情况 ==="
+          df -h
+          
+          # 清理系统临时文件
+          echo "清理系统临时文件..."
+          sudo rm -rf /tmp/* /var/tmp/*
+          
+          # 清理APT缓存
+          echo "清理APT缓存..."
+          sudo apt-get clean
+          sudo apt-get autoclean
+          
+          # 清理Docker镜像（如果存在）
+          if command -v docker &> /dev/null; then
+            echo "清理Docker镜像..."
+            sudo docker system prune -f || true
+            sudo docker volume prune -f || true
+          fi
+          
+          # 清理OpenWrt旧的构建文件
+          echo "清理OpenWrt旧的构建文件..."
+          cd openwrt
+          make clean > /dev/null 2>&1 || true
+          
+          # 再次显示磁盘空间使用情况
+          echo "=== 清理后磁盘空间使用情况 ==="
+          df -h
+
       - name: 启用SSH调试 (可选)
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event.inputs.ssh == 'true' }}
@@ -228,8 +259,10 @@ jobs:
         run: |
           cd openwrt
           echo -e "$(nproc) thread compile"
-          # 开始编译
-          make -j$(nproc) || make -j1 || make -j1 V=s
+          # 设置编译参数，减少临时文件生成
+          export MAKEFLAGS="--no-print-directory"
+          # 开始编译，使用-j1避免并发导致的磁盘空间问题
+          make -j1 || make -j1 V=s
           
           # 获取编译结果信息
           echo "status=success" >> $GITHUB_OUTPUT
