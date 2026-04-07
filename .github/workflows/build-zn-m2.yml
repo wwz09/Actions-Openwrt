@@ -315,7 +315,10 @@ jobs:
           
           # 复制固件文件
           echo "从 $TARGET_DIR 复制固件文件..."
-          find $TARGET_DIR -type f \( -name "*sysupgrade*.bin" -o -name "*factory*.bin" -o -name "*.img.gz" \) -exec cp {} $GITHUB_WORKSPACE/firmware/${{ env.DEVICE }}/ \;
+          # 先显示目录中的所有文件，便于调试
+          ls -la $TARGET_DIR
+          # 复制所有固件文件，包括factory和sysupgrade
+          find $TARGET_DIR -type f \( -name "*.bin" -o -name "*.img" -o -name "*.img.gz" \) -exec cp {} $GITHUB_WORKSPACE/firmware/${{ env.DEVICE }}/ \;
           
           # 复制构建信息
           echo "设备: ${{ env.DEVICE }}" > $GITHUB_WORKSPACE/firmware/${{ env.DEVICE }}/buildinfo.txt
