@@ -192,7 +192,7 @@ jobs:
           if grep -q "CONFIG_TARGET_qualcommax=y" .config; then
             echo "✓ 目标架构已正确配置为 qualcommax"
             # 再次验证设备配置
-            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx" .config; then
+            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_xiaomi_ax1800" .config; then
               echo "✓ 设备配置已正确应用: xiaomi-ax1800"
             else
               echo "✗ 错误: 设备配置未正确应用"
