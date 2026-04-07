@@ -147,8 +147,8 @@ jobs:
             
             # 验证配置文件内容
             echo "验证配置文件内容..."
-            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_zn_m2" $CONFIG_FILE; then
-              echo "✓ 配置文件包含正确的设备配置: CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_zn_m2"
+            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_cmiot_ax18" $CONFIG_FILE; then
+              echo "✓ 配置文件包含正确的设备配置: CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_cmiot_ax18"
             else
               echo "✗ 错误: 配置文件缺少正确的设备配置"
               cat $CONFIG_FILE | grep "CONFIG_TARGET_"
@@ -193,8 +193,8 @@ jobs:
           if grep -q "CONFIG_TARGET_qualcommax=y" .config; then
             echo "✓ 目标架构已正确配置为 qualcommax"
             # 再次验证设备配置
-            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_zn_m2" .config; then
-              echo "✓ 设备配置已正确应用: zn-m2"
+            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_cmiot_ax18" .config; then
+              echo "✓ 设备配置已正确应用: zn-m2 (cmiot_ax18)"
             else
               echo "✗ 错误: 设备配置未正确应用"
               grep "CONFIG_TARGET_qualcommax" .config
