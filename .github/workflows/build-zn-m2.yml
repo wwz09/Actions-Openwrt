@@ -136,13 +136,19 @@ jobs:
           
           # 复制配置文件
           if [ -f "$CONFIG_FILE" ]; then
+            # 先显示配置文件的完整路径
+            echo "配置文件路径: $CONFIG_FILE"
+            # 显示配置文件的内容
+            echo "配置文件内容:"
+            cat $CONFIG_FILE
+            # 复制配置文件
             cp "$CONFIG_FILE" .config
             echo "已加载配置文件: $CONFIG_FILE"
             
             # 验证配置文件内容
             echo "验证配置文件内容..."
-            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx" $CONFIG_FILE; then
-              echo "✓ 配置文件包含正确的设备配置: CONFIG_TARGET_qualcommax_ipq60xx"
+            if grep -q "CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_zn_m2" $CONFIG_FILE; then
+              echo "✓ 配置文件包含正确的设备配置: CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_zn_m2"
             else
               echo "✗ 错误: 配置文件缺少正确的设备配置"
               cat $CONFIG_FILE | grep "CONFIG_TARGET_"
