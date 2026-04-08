@@ -93,12 +93,19 @@ jobs:
           echo "最新提交:"
           git log --oneline -1
 
-      - name: 加载自定义feeds
+      - name: 替换feeds.conf.default文件
         run: |
           cd openwrt
-          # 第三方插件仓库已在 DIY Part 1 脚本中添加
-          # 显示feeds配置
-          cat feeds.conf.default
+          # 替换源码中的feeds.conf.default文件
+          if [ -f "$GITHUB_WORKSPACE/feeds.conf.default" ]; then
+            cp "$GITHUB_WORKSPACE/feeds.conf.default" feeds.conf.default
+            echo "已替换feeds.conf.default文件"
+            # 显示替换后的feeds配置
+            cat feeds.conf.default
+          else
+            echo "feeds.conf.default文件不存在，使用默认配置"
+            cat feeds.conf.default
+          fi
 
       - name: 执行DIY脚本 (Part 1)
         run: |

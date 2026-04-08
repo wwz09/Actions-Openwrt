@@ -1,0 +1,11 @@
+# 主源码仓库
+src-git packages https://github.com/coolsnowwolf/packages
+# LuCI 界面
+src-git luci https://github.com/coolsnowwolf/luci
+# routing 插件
+src-git routing https://git.openwrt.org/feed/routing.git
+# telephony 插件
+src-git telephony https://git.openwrt.org/feed/telephony.git
+# 第三方插件
+src-git kenzo https://github.com/kenzok8/openwrt-packages
+src-git small https://github.com/kenzok8/small
