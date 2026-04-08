@@ -365,7 +365,6 @@ jobs:
             - **编译时间**: ${{ github.event.repository.updated_at }}
             - **源码仓库**: [coolsnowwolf/lede](https://github.com/coolsnowwolf/lede)
             - **插件仓库**: [wwz09/QCA-Package](https://github.com/wwz09/QCA-Package)
-            - **工作流运行**: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
             
             ### 支持的设备
             - JDC AX1800

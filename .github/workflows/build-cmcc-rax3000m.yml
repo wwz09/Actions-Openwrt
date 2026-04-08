@@ -365,7 +365,7 @@ jobs:
             - **编译时间**: ${{ github.event.repository.updated_at }}
             - **源码仓库**: [coolsnowwolf/lede](https://github.com/coolsnowwolf/lede)
             - **插件仓库**: [kenzok8/openwrt-packages](https://github.com/kenzok8/openwrt-packages)
-            
+
             ### 支持的设备
             - CMCC RAX3000M
             
