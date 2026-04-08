@@ -17,3 +17,5 @@ src-git small https://github.com/kenzok8/small
 
 # 第三方插件库
 src-git kenzo https://github.com/kenzok8/openwrt-packages
+# OpenClash插件
+src-git openclash https://github.com/vernesong/OpenClash
